@@ -2,7 +2,7 @@ var a = angular.module('myApp',['ngRoute','ngAnimate','toaster']);
 a.config(['$routeProvider',function($routeProvider) {
 	$routeProvider
 		.when('/home', { title:'myApp | Home page', templateUrl:'partials/home.html', controller:'homeCtrl' })
-		.when('/reserved', { title:'myApp | Reserved', templateUrl:'partials/reserved.html', controller:'reservedCtrl' })
+		.when('/shop', { title:'myApp | Shop', templateUrl:'partials/shop.html', controller:'shopCtrl' })
 		.when('/login', { title:'myApp | Log-in', templateUrl:'partials/login.html', controller:'loginCtrl' })
 		.when('/dashboard', { title:'myApp | Dashboard', templateUrl:'partials/dashboard.html', controller:'dashboardCtrl' })
 		.otherwise({redirectTo:'/home'});
@@ -33,7 +33,8 @@ a.run(function($rootScope, $route, $location, Data) {
 				}
 			}
 			else {
-				if (nextUrl == '/reserved' || nextUrl == '/dashboard') {
+				if (nextUrl == '/shop' || nextUrl == '/dashboard') {
+					$rootScope.nextUrl = nextUrl;
 					$location.path("/login");
 				}
 			}
@@ -42,7 +43,9 @@ a.run(function($rootScope, $route, $location, Data) {
 });
 a.controller('myCtrl',function(){});
 a.controller('homeCtrl',function(){});
-a.controller('reservedCtrl',function(){});
+a.controller('shopCtrl',function(){
+	
+});
 a.controller('dashboardCtrl',['$scope','$location','Data',function($scope,$location,Data){
 	$scope.logout=function() {
 		Data.logout().then(function() {
@@ -50,11 +53,17 @@ a.controller('dashboardCtrl',['$scope','$location','Data',function($scope,$locat
 		});
 	}
 }]);
-a.controller('loginCtrl',['$scope', '$location', 'Data', function($scope,$location,Data){
+a.controller('loginCtrl',['$scope', '$rootScope', '$location', 'Data', function($scope,$rootScope,$location,Data){
 	$scope.login=function() {
 		Data.login($scope.loginname,$scope.loginpwd).then(function(results) {
-			if (results.data==1)
-				$location.path("/dashboard");
+			if (results.data==1) {
+				if ($rootScope.nextUrl) {
+					$location.path($rootScope.nextUrl);
+					delete $rootScope.nextUrl;
+				}
+				else
+					$location.path("/dashboard");
+			}
 			else
 				Data.toast('error',"login errato");
 			$scope.loginname=$scope.loginpwd='';
