@@ -1,0 +1,30 @@
+<DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<link rel="stylesheet" href="components/bootstrap-3.1.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="components/bootstrap-3.1.1/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="components/bootstrap-3.1.1/css/toaster.css" />
+	</head>
+	<body ng-controller="myCtrl">
+		<div class="col-lg-offset-3 col-lg-6">
+			<nav class="navbar navbar-default">
+				<ul class="nav nav-pills">
+					<li><a href="#/home">Home</a></li>
+					<li><a href="#/reserved">Reserved</a></li>
+					<li><a href="#/login">Login</a></li>
+				</ul>
+			</nav>
+			<div class="panel panell-default container-fluid">
+				<div ng-view class="panel-body"></div>
+				<div class="panel-footing ">Itis Meucci &copy; 2015</div>
+			</div>
+		</div>
+		<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+	</body>
+	<script src="components/jquery-2.1.1/jquery.min.js" type="text/javascript"></script>
+	<script src="js/angular.min.js" type="text/javascript"></script>
+	<script src="js/angular-route.min.js" type="text/javascript"></script>
+	<script src="js/angular-animate.min.js" ></script>
+	<script src="js/toaster.js" type="text/javascript"></script>
+	<script src="app/app.js" type="text/javascript"></script>
+</html>
