@@ -16,16 +16,18 @@ a.run(function($rootScope, $route, $location, Data) {
 	$rootScope.$on("$routeChangeStart", function (event, next, current) {
 		if (next.$$route)
 			var nextUrl = next.$$route.originalPath;
-		if (current.$$route)
+		if (current && current.$$route)
 			var currentUrl = current.$$route.originalPath;
 
 		$rootScope.authenticated = false;
 		Data.getsession().then(function (results) {
-			if (results.uid) {
+			if (results.userid) {
 				$rootScope.authenticated = true;
-				$rootScope.uid = results.uid;
-				$rootScope.name = results.name;
-				$rootScope.email = results.email;
+				$rootScope.userid = results.userid;
+				$rootScope.username = results.username;
+				$rootScope.usersurname = results.usersurname;
+				$rootScope.useremail = results.useremail;
+				$rootScope.userlevel = results.userlevel;
 				if (nextUrl == '/login') {
 					$location.path("/dashboard");
 				}
@@ -50,11 +52,12 @@ a.controller('dashboardCtrl',['$scope','$location','Data',function($scope,$locat
 }]);
 a.controller('loginCtrl',['$scope', '$location', 'Data', function($scope,$location,Data){
 	$scope.login=function() {
-		Data.login($scope.username,$scope.password).then(function(results) {
+		Data.login($scope.loginname,$scope.loginpwd).then(function(results) {
 			if (results.data==1)
 				$location.path("/dashboard");
 			else
-				Data.toast('warning',"login errato");
+				Data.toast('error',"login errato");
+			$scope.loginname=$scope.loginpwd='';
 		});
 	}
 }]);

@@ -9,7 +9,11 @@
 	if ($stmt->execute()) {
 		if ($stmt->rowCount() > 0) {
 			$result = $stmt->fetch();
-			$_SESSION['uid']=$result['userid'];
+			$_SESSION['userid']=$result['userid'];
+			$_SESSION['useremail']=$result['useremail'];
+			$_SESSION['username']=$result['username'];
+			$_SESSION['usersurname']=$result['usersurname'];
+			$_SESSION['userlevel']=$result['userlevel'];
 			echo 1;
 		}
 		else
