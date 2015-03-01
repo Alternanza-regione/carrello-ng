@@ -1,2 +1,25 @@
-<h4>SHOP</h4>
-<div id="content"/>
+<div class="pull-right"><img src="img/store.jpg" alt="store" /></div>
+<div class="row">
+	<label class="col-lg-2 text-right">Categoria:</label>
+	<div class="col-lg-4">
+	<select class="form-control" ng-model="sel.categid">
+		<option value="">&lt;tutte&gt;</option>
+		<option ng-repeat="c in categories" value="{{c.categid}}">{{c.categdescr}}</option>
+	</select>
+	</div>
+</div>
+<div class="row">
+	<label class="col-lg-2 text-right">Ricerca: </label>
+	<div class="input-group col-lg-4">
+		<input class="form-control" type="search" id="searchinput" ng-model="sel.proddescr" />
+		<span ng-click="sel.proddescr=''" class="input-group-addon glyphicon glyphicon-remove-circle"></span>
+	</div>
+</div>
+<h3>Prodotti</h3>
+<div class="row">
+	<div class="col-lg-8">
+		<table class="table table-striped">
+			<tr ng-repeat="p in products | filter:sel:strict"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro;' : 2}}</td></tr>
+		</table>
+	</div>
+</div>

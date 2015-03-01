@@ -6,17 +6,20 @@
 		<link rel="stylesheet" href="components/bootstrap-3.1.1/css/toaster.css" />
 	</head>
 	<body ng-controller="myCtrl">
-		<div class="col-lg-offset-3 col-lg-6">
+		<div class="container col-lg-offset-4 col-lg-4">
 			<nav class="navbar navbar-default">
-				<ul class="nav nav-pills">
-					<li><a href="#/home">Home</a></li>
-					<li><a href="#/shop">Shop</a></li>
-					<li><a href="#/login">Login</a></li>
-				</ul>
+				<div class="navbar-header">
+					<ul class="nav nav-pills">
+						<li><a style="color:brown" href="#/home">Home</a></li>
+						<li><a style="color:red" href="#/shop">Shop</a></li>
+						<li><a style="color:purple" href="#/login">Login</a></li>
+					</ul>
+				</div>
 			</nav>
 			<div class="panel panell-default container-fluid">
 				<div ng-view class="panel-body"></div>
-				<div class="panel-footing ">Itis Meucci &copy; 2015</div>
+				<hr />
+				<div class="panel-footing text-center">Itis Meucci &copy; 2015</div>
 			</div>
 		</div>
 		<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>

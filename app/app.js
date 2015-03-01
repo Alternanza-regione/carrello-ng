@@ -5,6 +5,7 @@ a.config(['$routeProvider',function($routeProvider) {
 		.when('/shop', { title:'myApp | Shop', templateUrl:'partials/shop.html', controller:'shopCtrl' })
 		.when('/login', { title:'myApp | Log-in', templateUrl:'partials/login.html', controller:'loginCtrl' })
 		.when('/dashboard', { title:'myApp | Dashboard', templateUrl:'partials/dashboard.html', controller:'dashboardCtrl' })
+		.when('/signup', { title:'myApp | Sign-up', templateUrl:'partials/signup.html', controller:'signupCtrl' })
 		.otherwise({redirectTo:'/home'});
 }]);
 a.run(function($rootScope, $route, $location, Data) {
@@ -43,13 +44,28 @@ a.run(function($rootScope, $route, $location, Data) {
 });
 a.controller('myCtrl',function(){});
 a.controller('homeCtrl',function(){});
-a.controller('shopCtrl',function(){
-	
-});
+a.controller('shopCtrl',['$scope','Data',function($scope,Data){
+	Data.get('categories.php').then(function(results) {
+		$scope.categories = results.data;
+	});
+	Data.get('products.php',{}).then(function(results) {
+		$scope.products = results.data;
+	});
+}]);
 a.controller('dashboardCtrl',['$scope','$location','Data',function($scope,$location,Data){
 	$scope.logout=function() {
 		Data.logout().then(function() {
 			$location.path("/home");
+		});
+	}
+}]);
+a.controller('signupCtrl',['$scope','$location','Data',function($scope,$location,Data){
+	$scope.signup=function() {
+		Data.get('signup.php',{'signupname':$scope.signupname,'signupsurname':$scope.signupsurname,'signupemail':$scope.signupemail,'signuppwd':$scope.signuppwd}).then(function(result) {
+			if (result.data==1) {
+				Data.toast('success','registrazione avvenuta');
+				$location.path('/login');
+			}
 		});
 	}
 }]);
@@ -68,6 +84,9 @@ a.controller('loginCtrl',['$scope', '$rootScope', '$location', 'Data', function(
 				Data.toast('error',"login errato");
 			$scope.loginname=$scope.loginpwd='';
 		});
+	};
+	$scope.signup=function() {
+		$location.path('/signup');
 	}
 }]);
 
@@ -90,6 +109,11 @@ a.factory('Data',['$http', 'toaster', function($http,toaster) {
 	obj.logout = function() {
 		return $http.get('db/logout.php');
 	}
+	obj.get = function(query,p) {
+		return $http.post('db/'+query,p).then(function(results) {
+			return results;
+		});
+	};
 	
 	return obj;
 }]);

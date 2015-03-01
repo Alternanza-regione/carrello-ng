@@ -1,4 +1,7 @@
-<h4>please, log in</h4>
-Username: <input type="text" ng-model="loginname" /><br />
-Password: <input type="password" ng-model="loginpwd" /><br />
-<button ng-click="login()">Login</button>
+<h3>Form di autenticazione</h3><br />
+<div class="row form-group"><label class="col-lg-2 text-right">E-mail:</label><div class="col-lg-6"><input type="email" class="form-control" ng-model="loginname" /></div></div>
+<div class="row form-group"><label class="col-lg-2 text-right">Password:</label><div class="col-lg-6"><input type="password" class="form-control" ng-model="loginpwd" /></div></div>
+<div class="row form-group">
+	<div class="col-lg-4 col-lg-offset-2"><button class="btn btn-primary" ng-click="signup()">Registrazione</button></div>
+	<div class="col-lg-6"><button class="btn btn-success" ng-click="login()">Login</button></div>
+</div>
