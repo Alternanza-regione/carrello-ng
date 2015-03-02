@@ -1,4 +1,4 @@
-<div class="pull-right"><img src="img/store.jpg" alt="store" /></div>
+<h3>Prodotti</h3>
 <div class="row">
 	<label class="col-lg-2 text-right">Categoria:</label>
 	<div class="col-lg-4">
@@ -15,11 +15,13 @@
 		<span ng-click="sel.proddescr=''" class="input-group-addon glyphicon glyphicon-remove-circle"></span>
 	</div>
 </div>
-<h3>Prodotti</h3>
 <div class="row">
 	<div class="col-lg-8">
 		<table class="table table-striped">
-			<tr ng-repeat="p in products | filter:sel:strict"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro;' : 2}}</td></tr>
+			<tr dir-paginate="p in products | filter:sel:strict | itemsPerPage:itemsperpage"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro;' : 2}}</td></tr>
 		</table>
 	</div>
 </div>
+<dir-pagination-controls></dir-pagination-controls>
+<input type="number" class="form-control" ng-model="itemsperpage" ng-init="itemsperpage=5" />
+<div class="pull-right"><img src="img/store.jpg" alt="store" /></div>

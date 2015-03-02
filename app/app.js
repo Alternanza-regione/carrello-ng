@@ -1,4 +1,4 @@
-var a = angular.module('myApp',['ngRoute','ngAnimate','toaster']);
+var a = angular.module('myApp',['ngRoute','ngAnimate','toaster','angularUtils.directives.dirPagination']);
 a.config(['$routeProvider',function($routeProvider) {
 	$routeProvider
 		.when('/home', { title:'myApp | Home page', templateUrl:'partials/home.html', controller:'homeCtrl' })
