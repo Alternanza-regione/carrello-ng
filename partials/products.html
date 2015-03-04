@@ -1,6 +1,6 @@
-<h3>Shop</h3>
+<h3>Prodotti</h3>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<div class="row">
 			<label class="col-md-4 text-right">Categoria:</label>
 			<div class="col-md-8">
@@ -21,9 +21,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-6">
 		<table class="table table-striped">
-			<tr dir-paginate="p in products | filter:sel:strict | itemsPerPage:itemsperpage"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro;' : 2}}</td><td class="text-center"><button class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span></button></td></tr>
+			<tr dir-paginate="p in products | filter:sel:strict | itemsPerPage:itemsperpage"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro;' : 2}}</td></tr>
 		</table>
 	</div>
 </div>
@@ -39,4 +39,3 @@
 		</select>
 	</div>
 </div>
-<div><img src="img/store.jpg" alt="store" class="img-responsive" /></div>
