@@ -2,7 +2,7 @@ a.controller('myCtrl',function(){
 	
 });
 
-a.controller('cartCtrl',['$scope','Data',function($scope,Data){
+a.controller('cartCtrl',['$scope','$location','Data',function($scope,$location,Data){
 	function totcart() {
 		tot = 0.0;
 		for (var y in $scope.prodincart) {
@@ -36,6 +36,12 @@ a.controller('cartCtrl',['$scope','Data',function($scope,Data){
 		});
 		Data.toast('info','Aumentata quantit&agrave; di '+descr);
 	}
+	$scope.checkout = function() {
+		Data.get('removecart.php',{}).then(function() {
+			$scope.tot=0;
+			$location.path('/shop');
+		});
+	}
 }]);
 
 a.controller('homeCtrl',function(){
@@ -54,7 +60,9 @@ a.controller('prodCtrl',['$scope','Data',function($scope,Data){
 a.controller('shopCtrl',['$scope','Data',function($scope,Data){
 
 	function getDatiCart(results) {
-		$scope.ncart=results.cart.length;
+		$scope.ncart=0;
+		if (results.cart)
+			$scope.ncart=results.cart.length;
 		tot = 0.0;
 		totq=0;
 		for (var x in results.cart) {

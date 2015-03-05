@@ -1,13 +1,16 @@
 <h4>CART</h4>
 <table class="table table-striped">
-	<tr><th>Descrizione</th><td colspan="3" class="text-center">Quantit&agrave;</th><th class="text-right">Prezzo unitario</th><th class="text-right">Prezzo totale</th></tr>
+	<tr><th>Descrizione</th><th colspan="3" class="text-center">Quantit&agrave;</th><th class="text-right">Prezzo unitario</th><th class="text-right">Prezzo totale</th></tr>
 	<tr ng-repeat="p in prodincart">
 		<td>{{p.proddescr}}</td>
-		<td><button class="btn btn-danger" ng-click="cartminus(p.prodid,p.proddescr)"><span class="glyphicon glyphicon-minus" /></button></td>
+		<td class="text-right"><button class="btn btn-danger" ng-click="cartminus(p.prodid,p.proddescr)"><span class="glyphicon glyphicon-minus" /></button></td>
 		<td class="text-center">{{p.quant}}</td>
 		<td><button class="btn btn-success" ng-click="cartplus(p.prodid,p.proddescr)"><span class="glyphicon glyphicon-plus" /></button></td>
 		<td class="text-right">{{p.prodcost | currency : '&euro; ' : 2}}</td>
 		<td class="text-right">{{p.prodcost*p.quant | currency : '&euro; ' : 2}}</td>
 	</tr>
 </table>
-Totale: &euro; {{tot}}
+<div class="panel panel-default">
+	<h3 class="text-center">Totale: &euro; {{tot}}</h3>
+	<h3 class="text-center"><a class="btn btn-warning" ng-click="checkout()">Conferma l'acquisto</a></h3>
+</div>
