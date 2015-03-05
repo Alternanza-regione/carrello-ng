@@ -1,6 +1,6 @@
 <h3>Shop</h3>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<div class="row">
 			<label class="col-md-4 text-right">Categoria:</label>
 			<div class="col-md-8">
@@ -20,10 +20,19 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">&nbsp;</div>
+		<h3>Cart</h3>
+		<div class="row">
+			Prodotti nel carrello: {{ncart}}<br />
+			n.elementi: {{qtotcart}}<br />
+			Totale: &euro; {{eurocart}}
+		</div>
+		<div class="row">&nbsp;</div>
+		<div class="row"><a class="btn btn-primary" href="#/cart"><span class="glyphicon glyphicon-shopping-cart"></span> vai al carrello</a></div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-6">
 		<table class="table table-striped">
-			<tr dir-paginate="p in products | filter:sel:strict | itemsPerPage:itemsperpage"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro;' : 2}}</td><td class="text-center"><button class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span></button></td></tr>
+			<tr dir-paginate="p in products | filter:sel:strict | itemsPerPage:itemsperpage"><td>{{p.proddescr}}</td><td class="text-right">{{p.prodcost | currency : '&euro; ' : 2}}</td><td class="text-center"><button class="btn btn-primary" ng-click="addtocart(p.prodid,p.proddescr)"><span class="glyphicon glyphicon-plus"></span></button></td></tr>
 		</table>
 	</div>
 </div>
@@ -39,4 +48,3 @@
 		</select>
 	</div>
 </div>
-<div><img src="img/store.jpg" alt="store" class="img-responsive" /></div>

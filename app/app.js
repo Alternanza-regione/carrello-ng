@@ -7,6 +7,7 @@ a.config(['$routeProvider',function($routeProvider) {
 		.when('/shop', { title:'myApp | Shop', templateUrl:'partials/shop.html', controller:'shopCtrl' })
 		.when('/login', { title:'myApp | Log-in', templateUrl:'partials/login.html', controller:'loginCtrl' })
 		.when('/dashboard', { title:'myApp | Dashboard', templateUrl:'partials/dashboard.html', controller:'dashboardCtrl' })
+		.when('/cart', { title:'myApp | Cart', templateUrl:'partials/cart.html', controller:'cartCtrl' })
 		.when('/signup', { title:'myApp | Sign-up', templateUrl:'partials/signup.html', controller:'signupCtrl' })
 		.otherwise({redirectTo:'/home'});
 }]);
@@ -71,6 +72,5 @@ a.factory('Data',['$http', 'toaster', function($http,toaster) {
 			return results;
 		});
 	};
-	
 	return obj;
 }]);
